@@ -1,0 +1,130 @@
+@use "../../../config/theme.scss" as theme;
+
+.footer {
+  background: theme.$secondary;
+  color: theme.$white;
+  padding: 60px 0 20px;
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-section {
+    .footer-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: theme.$white;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 12px;
+
+        a {
+          color: theme.$lightGray;
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: theme.$primary;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid theme.$darkGray;
+    padding-top: 30px;
+    margin-bottom: 30px;
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+
+      .social-link {
+        color: theme.$lightGray;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: theme.$primary;
+        }
+      }
+    }
+
+    .app-download-bottom {
+      text-align: center;
+
+      p {
+        color: theme.$lightGray;
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+
+      .app-buttons-bottom {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .btn {
+          padding: 8px 16px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .footer-copyright {
+    border-top: 1px solid theme.$darkGray;
+    padding-top: 20px;
+    text-align: center;
+
+    p {
+      color: theme.$lightGray;
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0 20px;
+
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .footer-bottom {
+      .social-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .app-download-bottom {
+        .app-buttons-bottom {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }
+}

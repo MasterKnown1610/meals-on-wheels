@@ -1,0 +1,83 @@
+@use "../../../config/theme.scss" as theme;
+
+.food-categories {
+  padding: 60px 0;
+  background: theme.$lightGray;
+
+  .categories-scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .categories-container {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    min-width: max-content;
+  }
+
+  .category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    .category-icon {
+      width: 80px;
+      height: 80px;
+      background: theme.$white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px theme.$shadow;
+
+      .emoji {
+        font-size: 32px;
+      }
+    }
+
+    .category-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: theme.$secondary;
+      text-align: center;
+      max-width: 80px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .categories-container {
+      gap: 16px;
+    }
+
+    .category-item {
+      .category-icon {
+        width: 60px;
+        height: 60px;
+
+        .emoji {
+          font-size: 24px;
+        }
+      }
+
+      .category-name {
+        font-size: 12px;
+        max-width: 60px;
+      }
+    }
+  }
+}

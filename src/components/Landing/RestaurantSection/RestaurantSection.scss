@@ -1,0 +1,109 @@
+@use "../../../config/theme.scss" as theme;
+
+.restaurant-section {
+  padding: 60px 0;
+  background: theme.$lightGray;
+
+  .restaurant-scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .restaurant-container {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    min-width: max-content;
+  }
+
+  .restaurant-card {
+    background: theme.$white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px theme.$shadow;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    min-width: 280px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px theme.$shadowHover;
+    }
+
+    .restaurant-image {
+      height: 160px;
+      background: theme.$lightGray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .emoji {
+        font-size: 48px;
+      }
+    }
+
+    .restaurant-content {
+      padding: 16px;
+
+      .restaurant-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: theme.$secondary;
+        margin-bottom: 8px;
+      }
+
+      .restaurant-cuisine {
+        font-size: 14px;
+        color: theme.$gray;
+        margin-bottom: 8px;
+      }
+
+      .restaurant-cost {
+        font-size: 14px;
+        font-weight: 500;
+        color: theme.$secondary;
+        margin-bottom: 8px;
+      }
+
+      .restaurant-offer {
+        font-size: 12px;
+        color: theme.$primary;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .restaurant-container {
+      gap: 16px;
+    }
+
+    .restaurant-card {
+      min-width: 240px;
+
+      .restaurant-image {
+        height: 120px;
+
+        .emoji {
+          font-size: 36px;
+        }
+      }
+
+      .restaurant-content {
+        padding: 12px;
+
+        .restaurant-name {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

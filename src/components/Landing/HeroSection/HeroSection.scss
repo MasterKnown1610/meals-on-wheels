@@ -1,0 +1,100 @@
+@use "../../../config/theme.scss" as theme;
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    theme.$primary 0%,
+    theme.$primaryHover 100%
+  );
+  padding: 80px 0;
+  text-align: center;
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: theme.$white;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .search-form {
+    .search-container {
+      display: flex;
+      background: theme.$white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px theme.$shadowHover;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .location-input,
+    .search-input {
+      flex: 1;
+      position: relative;
+
+      i {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: theme.$gray;
+        font-size: 16px;
+      }
+
+      input {
+        width: 100%;
+        padding: 16px 16px 16px 48px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        color: theme.$secondary;
+
+        &::placeholder {
+          color: theme.$gray;
+        }
+      }
+    }
+
+    .location-input {
+      border-right: 1px solid theme.$border;
+    }
+
+    .search-btn {
+      padding: 16px 32px;
+      border-radius: 0;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .hero-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .search-form {
+      .search-container {
+        flex-direction: column;
+      }
+
+      .location-input {
+        border-right: none;
+        border-bottom: 1px solid theme.$border;
+      }
+
+      .search-btn {
+        border-radius: 0 0 8px 8px;
+      }
+    }
+  }
+}

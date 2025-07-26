@@ -1,0 +1,75 @@
+@use "../../../config/theme.scss" as theme;
+
+.cities-section {
+  padding: 60px 0;
+  background: theme.$white;
+
+  .cities-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+  }
+
+  .cities-column {
+    .cities-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: theme.$secondary;
+      margin-bottom: 20px;
+    }
+
+    .cities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      .city-item {
+        color: theme.$gray;
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: theme.$primary;
+        }
+      }
+
+      .show-more-btn {
+        background: none;
+        border: none;
+        color: theme.$primary;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .cities-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .cities-column {
+      .cities-title {
+        font-size: 18px;
+      }
+
+      .cities-list {
+        gap: 8px;
+
+        .city-item {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+@use "../../../config/theme.scss" as theme;
+
+.restaurant-card {
+  background: theme.$white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px theme.$shadow;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px theme.$shadowHover;
+  }
+
+  .card-image {
+    position: relative;
+    height: 200px;
+    background: theme.$lightGray;
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, theme.$lightGray 0%, #e9ecef 100%);
+
+      .food-emoji {
+        font-size: 48px;
+      }
+    }
+
+    .ad-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: theme.$white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .offer-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: theme.$white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  .card-content {
+    padding: 16px;
+
+    .restaurant-info {
+      .restaurant-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: theme.$secondary;
+        margin: 0 0 8px 0;
+        line-height: 1.3;
+
+        .ad-text {
+          color: theme.$primary;
+          font-size: 14px;
+        }
+      }
+
+      .rating-delivery {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        .rating {
+          color: theme.$success;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .delivery-time {
+          color: theme.$gray;
+          font-size: 14px;
+        }
+      }
+
+      .cuisine {
+        color: theme.$secondary;
+        font-size: 14px;
+        margin: 0 0 4px 0;
+        line-height: 1.4;
+      }
+
+      .location {
+        color: theme.$gray;
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .restaurant-card {
+    .card-image {
+      height: 160px;
+
+      .food-emoji {
+        font-size: 36px;
+      }
+    }
+
+    .card-content {
+      padding: 12px;
+
+      .restaurant-info {
+        .restaurant-name {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

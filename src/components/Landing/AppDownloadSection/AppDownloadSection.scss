@@ -1,0 +1,149 @@
+@use "../../../config/theme.scss" as theme;
+
+.app-download-section {
+  padding: 80px 0;
+  background: theme.$gray;
+
+  .app-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .app-text {
+    flex: 1;
+
+    .app-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: theme.$white;
+      margin-bottom: 16px;
+    }
+
+    .app-description {
+      font-size: 18px;
+      color: theme.$lightGray;
+      margin-bottom: 32px;
+    }
+
+    .app-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .app-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .app-visual {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .phone-mockup {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      .phone-emoji {
+        font-size: 120px;
+      }
+
+      .qr-code {
+        width: 80px;
+        height: 80px;
+        background: theme.$white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: theme.$secondary;
+      }
+    }
+
+    .floating-items {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+
+      .floating-item {
+        position: absolute;
+        font-size: 32px;
+        animation: float 3s ease-in-out infinite;
+
+        &:nth-child(1) {
+          top: 20%;
+          left: 10%;
+          animation-delay: 0s;
+        }
+
+        &:nth-child(2) {
+          top: 60%;
+          right: 10%;
+          animation-delay: 1s;
+        }
+
+        &:nth-child(3) {
+          bottom: 20%;
+          left: 20%;
+          animation-delay: 2s;
+        }
+      }
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    .app-content {
+      flex-direction: column;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .app-text {
+      .app-title {
+        font-size: 28px;
+      }
+
+      .app-description {
+        font-size: 16px;
+      }
+
+      .app-buttons {
+        justify-content: center;
+      }
+    }
+
+    .app-visual {
+      .phone-mockup .phone-emoji {
+        font-size: 80px;
+      }
+
+      .floating-items .floating-item {
+        font-size: 24px;
+      }
+    }
+  }
+}
