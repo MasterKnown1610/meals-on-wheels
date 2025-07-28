@@ -11,157 +11,53 @@
   }
 }
 
-/* Header Styles */
-.dashboard-header {
-  background: theme.$white;
-  border-bottom: 1px solid theme.$border;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 12px 0;
-
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .logo-section {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: theme.$primary;
-      font-weight: 700;
-      font-size: 18px;
-
-      .logo-icon {
-        width: 32px;
-        height: 32px;
-        background: theme.$primary;
-        color: theme.$white;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 16px;
-      }
-    }
-
-    .location {
-      color: theme.$gray;
-      font-size: 14px;
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
-  .search-section {
-    flex: 1;
-    max-width: 500px;
-
-    .search-input {
-      .ant-input {
-        border-radius: 8px;
-        border: 1px solid theme.$border;
-
-        &:hover,
-        &:focus {
-          border-color: theme.$primary;
-        }
-      }
-    }
-  }
-
-  .user-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    .action-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: theme.$secondary;
-      font-size: 14px;
-      padding: 8px 12px;
-      border: none;
-      background: transparent;
-      transition: all 0.3s ease;
-
-      &:hover {
-        color: theme.$primary;
-        background: rgba(252, 128, 25, 0.1);
-      }
-
-      .anticon {
-        font-size: 16px;
-      }
-    }
-
-    .cart-btn {
-      .ant-badge {
-        .ant-badge-count {
-          background: theme.$primary;
-        }
-      }
-    }
-  }
-}
-
 /* Main Content Styles */
 .dashboard-main {
-  padding: 24px 0;
+  padding-top: 20px;
 
   .page-header {
-    margin-bottom: 24px;
+    text-align: center;
+    margin-bottom: 40px;
 
     .page-title {
       font-size: 32px;
       font-weight: 700;
       color: theme.$secondary;
-      margin: 0 0 8px 0;
+      margin-bottom: 10px;
     }
 
     .page-description {
       color: theme.$gray;
       font-size: 16px;
-      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
     }
   }
 
   .filters-section {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 16px 0;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
     border-bottom: 1px solid theme.$border;
 
     .filters-left {
       display: flex;
+      gap: 15px;
       align-items: center;
-      gap: 16px;
 
       .filter-btn {
         display: flex;
         align-items: center;
         gap: 8px;
+        padding: 10px 20px;
         border: 1px solid theme.$border;
         border-radius: 8px;
-        padding: 8px 16px;
-        color: theme.$secondary;
         background: theme.$white;
-        transition: all 0.3s ease;
+        color: theme.$secondary;
+        font-weight: 500;
+        transition: all 0.3s;
 
         &:hover {
           border-color: theme.$primary;
@@ -170,16 +66,11 @@
       }
 
       .sort-select {
-        min-width: 140px;
+        min-width: 150px;
 
         .ant-select-selector {
           border-radius: 8px;
           border: 1px solid theme.$border;
-
-          &:hover,
-          &:focus {
-            border-color: theme.$primary;
-          }
         }
       }
     }
@@ -189,10 +80,9 @@
         background: theme.$primary;
         border: none;
         border-radius: 8px;
-        padding: 8px 16px;
-        color: theme.$white;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s;
 
         &:hover {
           background: theme.$primaryHover;
@@ -202,66 +92,152 @@
     }
   }
 
-  .restaurant-count {
-    color: theme.$gray;
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
-
-  .restaurant-grid {
+  .restaurants-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
-  }
-}
+    padding: 20px 0;
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .dashboard-header {
-    .header-content {
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+    .restaurant-card {
+      background: theme.$white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px theme.$shadow;
+      overflow: hidden;
+      transition: all 0.3s ease;
 
-    .search-section {
-      order: 3;
-      flex: 1 1 100%;
-      max-width: none;
-    }
-  }
-
-  .restaurant-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-header {
-    .logo-section {
-      .location {
-        display: none;
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px theme.$shadowHover;
       }
-    }
 
-    .user-actions {
-      gap: 8px;
+      .card-image {
+        position: relative;
+        height: 200px;
+        background: linear-gradient(
+          45deg,
+          #ff9a9e 0%,
+          #fecfef 50%,
+          #fecfef 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      .action-btn {
-        padding: 6px 8px;
-        font-size: 12px;
+        .image-placeholder {
+          .food-emoji {
+            font-size: 80px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+          }
+        }
 
-        span {
-          display: none;
+        .ad-badge {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          background: theme.$warning;
+          color: theme.$white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .offer-badge {
+          position: absolute;
+          bottom: 12px;
+          left: 12px;
+          background: theme.$success;
+          color: theme.$white;
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .card-content {
+        padding: 20px;
+
+        .restaurant-info {
+          margin-bottom: 20px;
+
+          .restaurant-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: theme.$secondary;
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+          }
+
+          .restaurant-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 8px;
+
+            .rating {
+              color: theme.$success;
+              font-weight: 600;
+              font-size: 14px;
+            }
+
+            .delivery-time {
+              color: theme.$gray;
+              font-size: 14px;
+            }
+          }
+
+          .cuisine {
+            color: theme.$gray;
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+          }
+
+          .location {
+            color: theme.$gray;
+            font-size: 14px;
+            margin: 0;
+            font-weight: 500;
+          }
+        }
+
+        .card-actions {
+          .view-menu-btn {
+            width: 100%;
+            background: theme.$primary;
+            border: none;
+            border-radius: 8px;
+            height: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+
+            &:hover {
+              background: theme.$primaryHover;
+              transform: translateY(-1px);
+            }
+          }
         }
       }
     }
   }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .dashboard {
+    .container {
+      padding: 0 15px;
+    }
+  }
 
   .dashboard-main {
-    padding: 16px 0;
-
     .page-header {
+      margin-bottom: 30px;
+
       .page-title {
         font-size: 24px;
       }
@@ -273,8 +249,8 @@
 
     .filters-section {
       flex-direction: column;
+      gap: 15px;
       align-items: stretch;
-      gap: 12px;
 
       .filters-left {
         justify-content: space-between;
@@ -287,40 +263,31 @@
       }
     }
 
-    .restaurant-grid {
+    .restaurants-grid {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
 
       .restaurant-card {
         .card-image {
-          height: 160px;
+          height: 150px;
 
-          .food-emoji {
-            font-size: 36px;
+          .image-placeholder {
+            .food-emoji {
+              font-size: 60px;
+            }
           }
         }
 
         .card-content {
-          padding: 12px;
+          padding: 15px;
 
           .restaurant-info {
             .restaurant-name {
-              font-size: 16px;
+              font-size: 18px;
             }
           }
         }
       }
     }
-  }
-}
-
-/* Ant Design Overrides */
-.ant-badge {
-  .ant-badge-count {
-    background: theme.$primary;
-    font-size: 10px;
-    min-width: 16px;
-    height: 16px;
-    line-height: 16px;
   }
 }

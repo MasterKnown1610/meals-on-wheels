@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import Login from "./components/Login/Login.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import MealDetail from "./components/MealDetail/MealDetail.jsx";
+import Cart from "./components/Cart/Cart.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/meal/:id" element={<MealDetail />} />
+        <Route path="/cart" element={<Cart />} />
         <Route
           path="/terms"
           element={<div className="terms-page">Terms & Conditions Page</div>}

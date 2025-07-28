@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Badge, Divider } from "antd";
+import { Button, Badge, Divider, Radio, Checkbox, Space } from "antd";
 import {
   ArrowLeftOutlined,
   ShoppingCartOutlined,
@@ -9,12 +9,17 @@ import {
   LogoutOutlined,
   CalendarOutlined,
   ClockCircleOutlined,
+  PlusOutlined,
+  MinusOutlined,
+  FilterOutlined,
 } from "@ant-design/icons";
+import Navbar from "../Navbar/Navbar";
 import "./MealDetail.scss";
 
 const MealDetail = () => {
-  const [selectedDate, setSelectedDate] = useState("tue22");
   const [quantity, setQuantity] = useState(1);
+  const [selectedServes, setSelectedServes] = useState("1");
+  const [selectedAddOns, setSelectedAddOns] = useState([]);
 
   // Sample meal data
   const meal = {
@@ -26,6 +31,7 @@ const MealDetail = () => {
     category: "Italian",
     prepTime: "25-30 mins",
     calories: "650 kcal",
+    offer: "20% OFF",
     ingredients: [
       "Chicken breast",
       "Parmesan cheese",
@@ -41,20 +47,21 @@ const MealDetail = () => {
     },
   };
 
-  // Available dates for preorder
-  const availableDates = [
-    { id: "mon22", day: "Mon", date: "22", available: true },
-    { id: "tue22", day: "Tue", date: "22", available: true },
-    { id: "wed22", day: "Wed", date: "22", available: true },
-    { id: "thu24", day: "Thu", date: "24", available: true },
-    { id: "fri25", day: "Fri", date: "25", available: true },
-    { id: "sat26", day: "Sat", date: "26", available: false },
+  // Serves options
+  const servesOptions = [
+    { value: "1", label: "1 Serve", price: 0 },
+    { value: "2", label: "2 Serves", price: 8.0 },
+    { value: "3", label: "3 Serves", price: 12.0 },
   ];
 
-  const handlePreorder = () => {
-    console.log(`Preordering ${quantity} ${meal.name} for ${selectedDate}`);
-    // Add to cart logic here
-  };
+  // Add-ons options
+  const addOnsOptions = [
+    { id: 1, name: "Extra Cheese", price: 2.0 },
+    { id: 2, name: "Extra Sauce", price: 1.5 },
+    { id: 3, name: "Side Salad", price: 3.0 },
+    { id: 4, name: "Garlic Bread", price: 2.5 },
+    { id: 5, name: "Dessert", price: 4.0 },
+  ];
 
   const handleQuantityChange = (increment) => {
     const newQuantity = quantity + increment;
@@ -63,183 +70,217 @@ const MealDetail = () => {
     }
   };
 
+  const handleAddOnChange = (addOnId, checked) => {
+    if (checked) {
+      setSelectedAddOns([...selectedAddOns, addOnId]);
+    } else {
+      setSelectedAddOns(selectedAddOns.filter((id) => id !== addOnId));
+    }
+  };
+
+  const calculateTotalPrice = () => {
+    const basePrice = meal.price;
+    const servesPrice =
+      servesOptions.find((option) => option.value === selectedServes)?.price ||
+      0;
+    const addOnsPrice = selectedAddOns.reduce((total, addOnId) => {
+      const addOn = addOnsOptions.find((option) => option.id === addOnId);
+      return total + (addOn?.price || 0);
+    }, 0);
+
+    return (basePrice + servesPrice + addOnsPrice) * quantity;
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: meal.id,
+      name: meal.name,
+      quantity: quantity,
+      serves: selectedServes,
+      addOns: selectedAddOns.map((id) =>
+        addOnsOptions.find((option) => option.id === id)
+      ),
+      price: calculateTotalPrice(),
+      image: meal.image,
+    };
+
+    console.log("Added to cart:", cartItem);
+    // Here you would typically add to cart state/context
+    // For now, we'll navigate to cart page
+    window.location.href = "/cart";
+  };
+
   return (
     <div className="meal-detail">
-      {/* Mobile Header */}
-      <div className="mobile-header">
-        <div className="status-bar">
-          <span className="time">3:00</span>
-          <div className="status-icons">
-            <span className="signal">📶</span>
-            <span className="network">4G+</span>
-            <span className="battery">50%</span>
-          </div>
-        </div>
-        <div className="browser-bar">
-          <div className="url-bar">
-            <span className="home-icon">🏠</span>
-            <span className="url">chatgpt.com/s/m_682e53a5</span>
-            <span className="refresh-icon">🔄</span>
-            <span className="plus-icon">➕</span>
-            <span className="tab-count">31</span>
-          </div>
-        </div>
-        <div className="app-header">
-          <div className="header-content">
-            <span className="close-btn">✕</span>
-            <h1 className="app-title">Preorder Meals on Wheels App</h1>
-            <span className="download-icon">⬇️</span>
-          </div>
-          <span className="report-link">Report</span>
-        </div>
-      </div>
+      {/* Navbar */}
+      <Navbar cartCount={0} />
 
       {/* Main Content */}
       <div className="main-content">
-        <div className="container">
-          {/* App Branding */}
-          <div className="app-branding">
-            <div className="logo-section">
-              <div className="logo">
-                <div className="van-icon">🚚</div>
-                <span className="brand-name">Meals on Wheels</span>
-              </div>
-              <p className="subtitle">with ChefZGlobal</p>
-            </div>
-            <h2 className="page-title">Preorder Meals</h2>
-            <p className="page-description">
-              Place orders for Monday through Friday by 7:00 PM Eastern Time
-            </p>
+        {/* Page Header */}
+        <div className="page-header">
+          <div className="breadcrumb">
+            <Link to="/dashboard" className="breadcrumb-item">
+              Home
+            </Link>
+            <span className="separator">/</span>
+            <Link to="/dashboard" className="breadcrumb-item">
+              Restaurants
+            </Link>
+            <span className="separator">/</span>
+            <span className="breadcrumb-item active">Chicken Parmesan</span>
           </div>
+          <h1 className="page-title">Chicken Parmesan</h1>
+          <p className="page-subtitle">
+            Delicious Italian classic with tender chicken, melted cheese, and
+            perfectly cooked pasta
+          </p>
+        </div>
 
-          {/* Date Selection */}
-          <div className="date-selection">
-            <h3 className="section-title">Select Date</h3>
-            <div className="date-buttons">
-              {availableDates.map((date) => (
-                <button
-                  key={date.id}
-                  className={`date-btn ${
-                    selectedDate === date.id ? "selected" : ""
-                  } ${!date.available ? "disabled" : ""}`}
-                  onClick={() => date.available && setSelectedDate(date.id)}
-                  disabled={!date.available}
-                >
-                  <span className="day">{date.day}</span>
-                  <span className="date">{date.date}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Meal Card */}
-          <div className="meal-card">
+        {/* Meal Container */}
+        <div className="meal-container">
+          {/* Meal Image Section */}
+          <div className="meal-image-section">
             <div className="meal-image">
               <div className="image-placeholder">
                 <span className="food-emoji">{meal.image}</span>
               </div>
+              {meal.offer && (
+                <div className="offer-badge">
+                  <span>{meal.offer}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Meal Info */}
+          <div className="meal-info">
+            <div className="meal-header">
+              <h2 className="meal-name">{meal.name}</h2>
+              <div className="meal-meta">
+                <span className="category">{meal.category}</span>
+                <span className="prep-time">⏱️ {meal.prepTime}</span>
+              </div>
+              <p className="meal-description">{meal.description}</p>
             </div>
 
-            <div className="meal-info">
-              <div className="meal-header">
-                <h3 className="meal-name">{meal.name}</h3>
-                <div className="meal-meta">
-                  <span className="category">{meal.category}</span>
-                  <span className="prep-time">⏱️ {meal.prepTime}</span>
-                </div>
+            <div className="nutrition-badges">
+              <Badge count={meal.calories} className="calorie-badge" />
+              <Badge
+                count={`${meal.nutritionInfo.protein} protein`}
+                className="protein-badge"
+              />
+            </div>
+
+            {/* Serves Selection */}
+            <div className="serves-section">
+              <h3>Serves</h3>
+              <Radio.Group
+                value={selectedServes}
+                onChange={(e) => setSelectedServes(e.target.value)}
+                className="serves-options"
+              >
+                <Space direction="vertical" style={{ width: "100%" }}>
+                  {servesOptions.map((option) => (
+                    <Radio key={option.value} value={option.value}>
+                      {option.label}{" "}
+                      {option.price > 0 && `(+$${option.price.toFixed(2)})`}
+                    </Radio>
+                  ))}
+                </Space>
+              </Radio.Group>
+            </div>
+
+            {/* Add-ons Section */}
+            <div className="addons-section">
+              <h3>Add-ons</h3>
+              <div className="addons-list">
+                {addOnsOptions.map((addOn) => (
+                  <div key={addOn.id} className="addon-item">
+                    <Checkbox
+                      checked={selectedAddOns.includes(addOn.id)}
+                      onChange={(e) =>
+                        handleAddOnChange(addOn.id, e.target.checked)
+                      }
+                    >
+                      <span className="addon-name">{addOn.name}</span>
+                      <span className="addon-price">
+                        +${addOn.price.toFixed(2)}
+                      </span>
+                    </Checkbox>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              <p className="meal-description">{meal.description}</p>
+            {/* Ingredients Section */}
+            <div className="ingredients-section">
+              <h3>Ingredients</h3>
+              <div className="ingredients-list">
+                {meal.ingredients.map((ingredient, index) => (
+                  <span key={index} className="ingredient-tag">
+                    {ingredient}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-              <div className="nutrition-badges">
-                <Badge count={meal.calories} className="calorie-badge" />
-                <Badge
-                  count={`${meal.nutritionInfo.protein} protein`}
-                  className="protein-badge"
+            {/* Allergens Section */}
+            <div className="allergens-section">
+              <h3>Allergens</h3>
+              <div className="allergens-list">
+                {meal.allergens.map((allergen, index) => (
+                  <span key={index} className="allergen-tag">
+                    {allergen}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Action Bar */}
+        <div className="bottom-action-bar">
+          <div className="action-content">
+            <div className="quantity-section">
+              <span className="quantity-label">Quantity:</span>
+              <div className="quantity-controls">
+                <Button
+                  type="text"
+                  icon={<MinusOutlined />}
+                  onClick={() => handleQuantityChange(-1)}
+                  disabled={quantity <= 1}
+                  className="qty-btn"
+                />
+                <span className="quantity">{quantity}</span>
+                <Button
+                  type="text"
+                  icon={<PlusOutlined />}
+                  onClick={() => handleQuantityChange(1)}
+                  disabled={quantity >= 10}
+                  className="qty-btn"
                 />
               </div>
-
-              <div className="ingredients-section">
-                <h4>Ingredients</h4>
-                <div className="ingredients-list">
-                  {meal.ingredients.map((ingredient, index) => (
-                    <span key={index} className="ingredient-tag">
-                      {ingredient}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="allergens-section">
-                <h4>Allergens</h4>
-                <div className="allergens-list">
-                  {meal.allergens.map((allergen, index) => (
-                    <span key={index} className="allergen-tag">
-                      {allergen}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            <div className="meal-actions">
-              <div className="price-section">
-                <span className="price">${meal.price.toFixed(2)}</span>
-                <div className="quantity-controls">
-                  <button
-                    className="qty-btn"
-                    onClick={() => handleQuantityChange(-1)}
-                    disabled={quantity <= 1}
-                  >
-                    -
-                  </button>
-                  <span className="quantity">{quantity}</span>
-                  <button
-                    className="qty-btn"
-                    onClick={() => handleQuantityChange(1)}
-                    disabled={quantity >= 10}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
+            <div className="price-section">
+              <span className="total-price">
+                ${calculateTotalPrice().toFixed(2)}
+              </span>
+            </div>
 
+            <div className="action-buttons">
               <Button
                 type="primary"
                 size="large"
-                className="preorder-btn"
-                onClick={handlePreorder}
+                className="add-to-cart-btn"
+                onClick={handleAddToCart}
                 icon={<ShoppingCartOutlined />}
               >
-                Preorder
+                Add to Cart
               </Button>
             </div>
           </div>
-
-          {/* Order Cutoff */}
-          <div className="cutoff-notice">
-            <ClockCircleOutlined />
-            <span>Order cutoff time 7:00 PM Eastern</span>
-          </div>
-
-          {/* User Menu */}
-          {/* <div className="user-menu">
-            <Link to="/profile" className="menu-item">
-              <UserOutlined />
-              <span>Profile</span>
-              <ArrowLeftOutlined className="arrow" />
-            </Link>
-            <Link to="/order-history" className="menu-item">
-              <HistoryOutlined />
-              <span>Order History</span>
-              <ArrowLeftOutlined className="arrow" />
-            </Link>
-            <button className="menu-item signout">
-              <LogoutOutlined />
-              <span>Sign Out</span>
-              <ArrowLeftOutlined className="arrow" />
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

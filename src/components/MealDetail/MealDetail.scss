@@ -3,685 +3,522 @@
 .meal-detail {
   min-height: 100vh;
   background: theme.$white;
-  position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
 
-  .container {
+  // Main Content
+  .main-content {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 24px;
-  }
-}
+    padding: 40px 24px;
 
-/* Mobile Header Styles */
-.mobile-header {
-  background: theme.$white;
-  border-bottom: 1px solid theme.$border;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+    .page-header {
+      margin-bottom: 40px;
+      text-align: center;
 
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 16px;
-    background: #000;
-    color: theme.$white;
-    font-size: 12px;
-    font-weight: 500;
-
-    .status-icons {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-  }
-
-  .browser-bar {
-    background: #f5f5f5;
-    padding: 8px 16px;
-    border-bottom: 1px solid theme.$border;
-
-    .url-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: theme.$gray;
-
-      .url {
-        flex: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  .app-header {
-    padding: 12px 16px;
-    background: theme.$white;
-
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4px;
-
-      .close-btn {
-        font-size: 18px;
-        color: theme.$gray;
-        cursor: pointer;
-      }
-
-      .app-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: theme.$secondary;
-        margin: 0;
-        flex: 1;
-        text-align: center;
-      }
-
-      .download-icon {
-        font-size: 16px;
-        color: theme.$primary;
-        cursor: pointer;
-      }
-    }
-
-    .report-link {
-      font-size: 12px;
-      color: theme.$primary;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-}
-
-/* Main Content Styles */
-.main-content {
-  padding: 20px 0;
-
-  .app-branding {
-    text-align: center;
-    margin-bottom: 32px;
-
-    .logo-section {
-      margin-bottom: 16px;
-
-      .logo {
+      .breadcrumb {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        margin-bottom: 8px;
-
-        .van-icon {
-          font-size: 32px;
-          animation: drive 2s ease-in-out infinite;
-        }
-
-        .brand-name {
-          font-size: 24px;
-          font-weight: 700;
-          color: theme.$secondary;
-        }
-      }
-
-      .subtitle {
+        gap: 10px;
+        margin-bottom: 20px;
         color: theme.$gray;
         font-size: 14px;
-        margin: 0;
-      }
-    }
 
-    .page-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: theme.$secondary;
-      margin: 0 0 8px 0;
-    }
-
-    .page-description {
-      color: theme.$gray;
-      font-size: 16px;
-      margin: 0;
-      line-height: 1.5;
-    }
-  }
-
-  .date-selection {
-    margin-bottom: 32px;
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: theme.$secondary;
-      margin: 0 0 16px 0;
-    }
-
-    .date-buttons {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 4px 0;
-
-      .date-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 12px 16px;
-        border: 2px solid theme.$border;
-        border-radius: 12px;
-        background: theme.$white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        min-width: 60px;
-        white-space: nowrap;
-
-        .day {
-          font-size: 12px;
-          font-weight: 500;
+        .breadcrumb-item {
           color: theme.$gray;
-          margin-bottom: 4px;
-        }
-
-        .date {
-          font-size: 16px;
-          font-weight: 600;
-          color: theme.$secondary;
-        }
-
-        &:hover {
-          border-color: theme.$primary;
-        }
-
-        &.selected {
-          border-color: theme.$primary;
-          background: theme.$primary;
-          color: theme.$white;
-
-          .day,
-          .date {
-            color: theme.$white;
-          }
-        }
-
-        &.disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-          background: theme.$lightGray;
+          text-decoration: none;
 
           &:hover {
-            border-color: theme.$border;
+            color: theme.$primary;
           }
-        }
-      }
-    }
-  }
 
-  .meal-card {
-    background: theme.$white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px theme.$shadow;
-    margin-bottom: 24px;
-
-    .meal-image {
-      position: relative;
-      height: 200px;
-      background: linear-gradient(135deg, theme.$lightGray 0%, #e9ecef 100%);
-
-      .image-placeholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .food-emoji {
-          font-size: 80px;
-        }
-      }
-    }
-
-    .meal-info {
-      padding: 24px;
-
-      .meal-header {
-        margin-bottom: 16px;
-
-        .meal-name {
-          font-size: 24px;
-          font-weight: 700;
-          color: theme.$secondary;
-          margin: 0 0 8px 0;
-        }
-
-        .meal-meta {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-
-          .category {
-            background: theme.$primary;
-            color: theme.$white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+          &.active {
+            color: theme.$secondary;
             font-weight: 500;
           }
-
-          .prep-time {
-            color: theme.$gray;
-            font-size: 14px;
-          }
-        }
-      }
-
-      .meal-description {
-        color: theme.$secondary;
-        font-size: 16px;
-        margin: 0 0 16px 0;
-        line-height: 1.5;
-      }
-
-      .nutrition-badges {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 24px;
-
-        .ant-badge {
-          .ant-badge-count {
-            background: theme.$success;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 12px;
-          }
-        }
-      }
-
-      .ingredients-section,
-      .allergens-section {
-        margin-bottom: 20px;
-
-        h4 {
-          font-size: 16px;
-          font-weight: 600;
-          color: theme.$secondary;
-          margin: 0 0 12px 0;
         }
 
-        .ingredients-list,
-        .allergens-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-
-          .ingredient-tag,
-          .allergen-tag {
-            background: theme.$lightGray;
-            color: theme.$secondary;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-          }
-
-          .allergen-tag {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-          }
-        }
-      }
-    }
-
-    .meal-actions {
-      padding: 24px;
-      border-top: 1px solid theme.$border;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-
-      .price-section {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-
-        .price {
-          font-size: 24px;
-          font-weight: 700;
-          color: theme.$primary;
-        }
-
-        .quantity-controls {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-
-          .qty-btn {
-            width: 32px;
-            height: 32px;
-            border: 2px solid theme.$border;
-            border-radius: 50%;
-            background: theme.$white;
-            color: theme.$secondary;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            &:hover:not(:disabled) {
-              border-color: theme.$primary;
-              color: theme.$primary;
-            }
-
-            &:disabled {
-              opacity: 0.5;
-              cursor: not-allowed;
-            }
-          }
-
-          .quantity {
-            font-size: 18px;
-            font-weight: 600;
-            color: theme.$secondary;
-            min-width: 20px;
-            text-align: center;
-          }
-        }
-      }
-
-      .preorder-btn {
-        background: theme.$primary;
-        border: none;
-        border-radius: 12px;
-        padding: 12px 32px;
-        font-size: 16px;
-        font-weight: 600;
-        height: auto;
-
-        &:hover {
-          background: theme.$primaryHover;
-          transform: translateY(-2px);
-        }
-      }
-    }
-  }
-
-  .cutoff-notice {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: theme.$lightGray;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 32px;
-    color: theme.$gray;
-    font-size: 14px;
-
-    .anticon {
-      color: theme.$warning;
-      font-size: 16px;
-    }
-  }
-
-  .user-menu {
-    background: theme.$white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px theme.$shadow;
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 20px;
-      text-decoration: none;
-      color: theme.$secondary;
-      border-bottom: 1px solid theme.$border;
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:hover {
-        background: theme.$lightGray;
-        color: theme.$primary;
-      }
-
-      .anticon {
-        font-size: 18px;
-      }
-
-      span {
-        flex: 1;
-        font-size: 16px;
-        font-weight: 500;
-      }
-
-      .arrow {
-        transform: rotate(180deg);
-        color: theme.$gray;
-      }
-
-      &.signout {
-        color: theme.$error;
-
-        &:hover {
-          background: #fff5f5;
-          color: theme.$error;
-        }
-      }
-    }
-  }
-}
-
-/* Animations */
-@keyframes drive {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-}
-
-/* Desktop Adaptations */
-@media (min-width: 768px) {
-  .meal-detail {
-    .container {
-      padding: 0 48px;
-    }
-  }
-
-  .mobile-header {
-    display: none;
-  }
-
-  .main-content {
-    padding: 40px 0;
-
-    .app-branding {
-      margin-bottom: 48px;
-
-      .logo-section {
-        .logo {
-          .van-icon {
-            font-size: 48px;
-          }
-
-          .brand-name {
-            font-size: 32px;
-          }
+        .separator {
+          color: theme.$border;
         }
       }
 
       .page-title {
-        font-size: 36px;
+        font-size: 32px;
+        font-weight: 700;
+        color: theme.$secondary;
+        margin-bottom: 10px;
       }
 
-      .page-description {
-        font-size: 18px;
-      }
-    }
-
-    .date-selection {
-      margin-bottom: 48px;
-
-      .date-buttons {
-        justify-content: center;
-        gap: 16px;
-
-        .date-btn {
-          min-width: 80px;
-          padding: 16px 20px;
-
-          .day {
-            font-size: 14px;
-          }
-
-          .date {
-            font-size: 18px;
-          }
-        }
+      .page-subtitle {
+        color: theme.$gray;
+        font-size: 16px;
+        max-width: 600px;
+        margin: 0 auto;
       }
     }
 
-    .meal-card {
+    .meal-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
+      gap: 60px;
+      align-items: start;
 
-      .meal-image {
-        height: 100%;
-        min-height: 400px;
+      // Meal Image Section
+      .meal-image-section {
+        position: sticky;
+        top: 100px;
+
+        .meal-image {
+          position: relative;
+          width: 100%;
+          height: 400px;
+          border-radius: 20px;
+          overflow: hidden;
+          background: linear-gradient(
+            45deg,
+            #ff9a9e 0%,
+            #fecfef 50%,
+            #fecfef 100%
+          );
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+          .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+
+            .food-emoji {
+              font-size: 120px;
+              filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            }
+          }
+
+          .offer-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: theme.$warning;
+            color: theme.$white;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+          }
+        }
       }
 
+      // Meal Info
       .meal-info {
-        padding: 32px;
-
+        padding: 35px;
         .meal-header {
+          margin-bottom: 30px;
+
           .meal-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: theme.$secondary;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+          }
+
+          .meal-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+
+            .category {
+              background: theme.$primary;
+              color: theme.$white;
+              padding: 6px 16px;
+              border-radius: 20px;
+              font-size: 14px;
+              font-weight: 500;
+            }
+
+            .prep-time {
+              color: theme.$gray;
+              font-size: 16px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+          }
+
+          .meal-description {
+            color: theme.$gray;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+          }
+        }
+
+        .nutrition-badges {
+          display: flex;
+          gap: 15px;
+          margin-bottom: 40px;
+
+          .calorie-badge {
+            .ant-badge-count {
+              background: theme.$success;
+              font-weight: 600;
+              // padding: 8px 12px;
+              border-radius: 20px;
+            }
+          }
+
+          .protein-badge {
+            .ant-badge-count {
+              background: theme.$primary;
+              font-weight: 600;
+              // padding: 8px 12px;
+              border-radius: 20px;
+            }
+          }
+        }
+
+        // Serves Section
+        .serves-section {
+          margin-bottom: 40px;
+
+          h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: theme.$secondary;
+            margin-bottom: 20px;
+          }
+
+          .serves-options {
+            .ant-radio-group {
+              width: 100%;
+            }
+
+            .ant-radio-wrapper {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 15px 20px;
+              border: 1px solid theme.$border;
+              border-radius: 12px;
+              margin-bottom: 10px;
+              transition: all 0.3s;
+
+              &:hover {
+                border-color: theme.$primary;
+                background: #f6f8ff;
+              }
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+
+              .ant-radio {
+                margin-right: 15px;
+              }
+
+              .ant-radio-checked {
+                .ant-radio-inner {
+                  border-color: theme.$primary;
+                  background: theme.$primary;
+                }
+              }
+            }
+          }
+        }
+
+        // Add-ons Section
+        .addons-section {
+          margin-bottom: 40px;
+
+          h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: theme.$secondary;
+            margin-bottom: 20px;
+          }
+
+          .addons-list {
+            .addon-item {
+              display: flex;
+              align-items: center;
+              padding: 15px 20px;
+              border: 1px solid theme.$border;
+              border-radius: 12px;
+              margin-bottom: 10px;
+              transition: all 0.3s;
+
+              &:hover {
+                border-color: theme.$primary;
+                background: #f6f8ff;
+              }
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+
+              .ant-checkbox-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .addon-name {
+                  font-weight: 500;
+                  color: theme.$secondary;
+                  font-size: 16px;
+                }
+
+                .addon-price {
+                  color: theme.$primary;
+                  font-weight: 600;
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+        }
+
+        // Ingredients Section
+        .ingredients-section {
+          margin-bottom: 40px;
+
+          h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: theme.$secondary;
+            margin-bottom: 20px;
+          }
+
+          .ingredients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .ingredient-tag {
+              background: theme.$lightGray;
+              color: theme.$gray;
+              padding: 8px 16px;
+              border-radius: 20px;
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+
+        // Allergens Section
+        .allergens-section {
+          margin-bottom: 40px;
+
+          h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: theme.$secondary;
+            margin-bottom: 20px;
+          }
+
+          .allergens-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .allergen-tag {
+              background: #fff2e8;
+              color: #d46b08;
+              padding: 8px 16px;
+              border-radius: 20px;
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
+    // Bottom Action Bar
+    .bottom-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: theme.$white;
+      border-top: 1px solid theme.$border;
+      box-shadow: 0 -4px 12px theme.$shadow;
+      z-index: 1000;
+
+      .action-content {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+
+        .quantity-section {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          .quantity-label {
+            font-weight: 500;
+            color: theme.$secondary;
+            font-size: 16px;
+          }
+
+          .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: theme.$lightGray;
+            border-radius: 25px;
+            padding: 8px;
+
+            .qty-btn {
+              border: none;
+              background: transparent;
+              color: theme.$gray;
+              padding: 8px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s;
+              width: 35px;
+              height: 35px;
+
+              &:hover:not(:disabled) {
+                background: #e6f7ff;
+                color: theme.$primary;
+              }
+
+              &:disabled {
+                color: theme.$border;
+              }
+            }
+
+            .quantity {
+              font-weight: 600;
+              color: theme.$secondary;
+              min-width: 30px;
+              text-align: center;
+              font-size: 18px;
+            }
+          }
+        }
+
+        .price-section {
+          .total-price {
             font-size: 28px;
+            font-weight: 700;
+            color: theme.$secondary;
           }
         }
 
-        .meal-description {
-          font-size: 18px;
-        }
-      }
+        .action-buttons {
+          .add-to-cart-btn {
+            background: theme.$primary;
+            border: none;
+            border-radius: 30px;
+            height: 55px;
+            padding: 0 40px;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(252, 128, 25, 0.3);
+            transition: all 0.3s;
 
-      .meal-actions {
-        grid-column: 1 / -1;
-        padding: 32px;
+            &:hover {
+              background: theme.$primaryHover;
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba(252, 128, 25, 0.4);
+            }
+          }
+        }
       }
     }
   }
 }
 
-@media (min-width: 1024px) {
+// Responsive Design
+@media (max-width: 1024px) {
   .meal-detail {
-    .container {
-      padding: 0 64px;
+    .main-content {
+      .meal-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+
+        .meal-image-section {
+          position: static;
+
+          .meal-image {
+            height: 300px;
+          }
+        }
+      }
     }
   }
+}
 
-  .main-content {
-    .meal-card {
-      grid-template-columns: 1fr 1fr 1fr;
-      max-width: 1200px;
-      margin: 0 auto 48px auto;
+@media (max-width: 768px) {
+  .meal-detail {
+    .main-content {
+      padding: 20px 15px;
 
-      .meal-image {
-        grid-column: 1;
+      .page-header {
+        margin-bottom: 30px;
+
+        .page-title {
+          font-size: 24px;
+        }
+
+        .page-subtitle {
+          font-size: 14px;
+        }
       }
 
-      .meal-info {
-        grid-column: 2;
+      .meal-container {
+        .meal-info {
+          .meal-header {
+            .meal-name {
+              font-size: 28px;
+            }
+          }
+
+          .serves-section,
+          .addons-section,
+          .ingredients-section,
+          .allergens-section {
+            h3 {
+              font-size: 20px;
+            }
+          }
+        }
       }
 
-      .meal-actions {
-        grid-column: 3;
-        grid-row: 1 / 3;
-        border-top: none;
-        border-left: 1px solid theme.$border;
-        flex-direction: column;
-        justify-content: center;
-        gap: 24px;
-
-        .price-section {
+      .bottom-action-bar {
+        .action-content {
+          padding: 15px;
           flex-direction: column;
-          align-items: flex-start;
-          gap: 24px;
+          gap: 20px;
 
-          .price {
-            font-size: 32px;
+          .quantity-section {
+            width: 100%;
+            justify-content: center;
           }
-        }
 
-        .preorder-btn {
-          width: 100%;
-          padding: 16px 32px;
-          font-size: 18px;
-        }
-      }
-    }
-
-    .cutoff-notice {
-      max-width: 1200px;
-      margin: 0 auto 48px auto;
-    }
-
-    .user-menu {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .meal-detail {
-    .container {
-      padding: 0 16px;
-    }
-  }
-
-  .main-content {
-    padding: 16px 0;
-
-    .meal-card {
-      .meal-info {
-        padding: 20px;
-
-        .meal-header {
-          .meal-name {
-            font-size: 20px;
+          .price-section {
+            text-align: center;
           }
-        }
-      }
 
-      .meal-actions {
-        padding: 20px;
-        flex-direction: column;
-        gap: 16px;
+          .action-buttons {
+            width: 100%;
 
-        .price-section {
-          width: 100%;
-          justify-content: space-between;
-        }
-
-        .preorder-btn {
-          width: 100%;
+            .add-to-cart-btn {
+              width: 100%;
+            }
+          }
         }
       }
     }

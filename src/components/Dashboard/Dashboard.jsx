@@ -1,100 +1,98 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Input, Button, Select, Badge } from "antd";
+import { Button, Badge, Divider, Select, Space } from "antd";
 import {
-  SearchOutlined,
-  FilterOutlined,
   ShoppingCartOutlined,
   UserOutlined,
+  FilterOutlined,
 } from "@ant-design/icons";
-import RestaurantCard from "./RestaurantCard/RestaurantCard.jsx";
+import Navbar from "../Navbar/Navbar";
 import "./Dashboard.scss";
 
-const { Search } = Input;
 const { Option } = Select;
 
 const Dashboard = () => {
-  const [searchQuery, setSearchQuery] = useState("Biryani");
+  const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
 
   // Sample restaurant data
   const restaurants = [
     {
       id: 1,
-      name: "Behrouz Biryani",
-      rating: 3.8,
-      deliveryTime: "25-30 mins",
-      cuisine: "Biryani, Kebabs, Mughlai, Lucknowi",
-      location: "Venkat Nagar Colony",
-      image: "🍚",
-      offer: "ITEMS AT ₹199",
+      name: "Pizza Palace",
+      rating: 4.5,
+      deliveryTime: "20-25 mins",
+      cuisine: "Pizza, Italian, Fast Food",
+      location: "Kukatpally",
+      image: "🍕",
+      offer: "50% OFF UPTO ₹100",
       isAd: true,
     },
     {
       id: 2,
-      name: "Raju Gari Biryani",
-      rating: 3.8,
-      deliveryTime: "20-25 mins",
-      cuisine: "Biryani, Snacks, Chinese, Mughlai",
+      name: "Burger House",
+      rating: 4.2,
+      deliveryTime: "15-20 mins",
+      cuisine: "Burgers, American, Fast Food",
       location: "Kukatpally",
-      image: "🍛",
-      offer: "60% OFF UPTO ₹120",
+      image: "🍔",
+      offer: "FREE DELIVERY",
       isAd: false,
     },
     {
       id: 3,
-      name: "The Biryani Life",
-      rating: 3.5,
+      name: "Sushi Express",
+      rating: 4.7,
       deliveryTime: "25-30 mins",
-      cuisine: "Biryani, Mughlai, Lucknowi",
-      location: "Venkat Nagar Colony",
-      image: "🍽️",
-      offer: "ITEMS AT ₹149",
-      isAd: true,
+      cuisine: "Sushi, Japanese, Asian",
+      location: "Kukatpally",
+      image: "🍣",
+      offer: "BUY 1 GET 1 FREE",
+      isAd: false,
     },
     {
       id: 4,
-      name: "Chaitanya Food Court",
-      rating: 4.5,
-      deliveryTime: "15-20 mins",
-      cuisine: "Biryani, Chinese, Andhra, North Indian",
+      name: "Taco Bell",
+      rating: 4.0,
+      deliveryTime: "18-22 mins",
+      cuisine: "Mexican, Fast Food",
       location: "Kukatpally",
-      image: "🍲",
-      offer: "ITEMS AT ₹49",
+      image: "🌮",
+      offer: "FLAT ₹50 OFF",
       isAd: false,
     },
     {
       id: 5,
-      name: "Wholesome Bowlsome",
+      name: "Chicken Wings",
       rating: 4.3,
-      deliveryTime: "40-45 mins",
-      cuisine: "Biryani, North Indian, Punjabi, South Indian",
+      deliveryTime: "22-27 mins",
+      cuisine: "Chicken, American, Fast Food",
       location: "Kukatpally",
-      image: "🥘",
-      offer: "ITEMS AT ₹99",
-      isAd: true,
+      image: "🍗",
+      offer: "20% OFF ON ORDERS ABOVE ₹200",
+      isAd: false,
     },
     {
       id: 6,
-      name: "Chutneys hub",
-      rating: 4.2,
-      deliveryTime: "15-20 mins",
-      cuisine: "Indian, Biryani",
+      name: "Ice Cream World",
+      rating: 4.6,
+      deliveryTime: "10-15 mins",
+      cuisine: "Desserts, Ice Cream",
       location: "Kukatpally",
-      image: "🍛",
-      offer: "10% OFF UPTO ₹40",
+      image: "🍦",
+      offer: "BUY 2 GET 1 FREE",
       isAd: false,
     },
     {
       id: 7,
-      name: "Potful - Claypot Biryanis",
-      rating: 4.3,
-      deliveryTime: "45-55 mins",
-      cuisine: "Biryani, North Indian, Kebabs, Mughlai",
+      name: "Coffee Corner",
+      rating: 4.1,
+      deliveryTime: "12-18 mins",
+      cuisine: "Coffee, Beverages, Snacks",
       location: "Kukatpally",
-      image: "🍚",
-      offer: "ITEMS AT ₹99",
-      isAd: true,
+      image: "☕",
+      offer: "FREE COFFEE ON FIRST ORDER",
+      isAd: false,
     },
     {
       id: 8,
@@ -111,53 +109,8 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="container">
-          <div className="header-content">
-            <div className="logo-section">
-              <Link to="/" className="logo">
-                <div className="logo-icon">M</div>
-                <span>Meels on Wheels</span>
-              </Link>
-              <div className="location">
-                <span>Western Hills, Jal Vayu Vihar, Kukat...</span>
-              </div>
-            </div>
-
-            <div className="search-section">
-              <Search
-                placeholder="Search for restaurants and food"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                size="large"
-                className="search-input"
-              />
-            </div>
-
-            <div className="user-actions">
-              <Button type="text" className="action-btn">
-                <Badge count="NEW" size="small">
-                  <span>Offers</span>
-                </Badge>
-              </Button>
-              <Button type="text" className="action-btn">
-                Help
-              </Button>
-              <Button type="text" className="action-btn">
-                <UserOutlined />
-                <span>Karthikeya</span>
-              </Button>
-              <Button type="text" className="action-btn cart-btn">
-                <ShoppingCartOutlined />
-                <Badge count={0} size="small">
-                  <span>Cart</span>
-                </Badge>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Navbar */}
+      <Navbar cartCount={0} />
 
       {/* Main Content */}
       <main className="dashboard-main">
@@ -196,15 +149,48 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Restaurant Count */}
-          <div className="restaurant-count">
-            {restaurants.length} Restaurants to explore
-          </div>
-
-          {/* Restaurant Grid */}
-          <div className="restaurant-grid">
+          {/* Restaurants Grid */}
+          <div className="restaurants-grid">
             {restaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+              <div key={restaurant.id} className="restaurant-card">
+                <div className="card-image">
+                  <div className="image-placeholder">
+                    <span className="food-emoji">{restaurant.image}</span>
+                  </div>
+                  {restaurant.isAd && (
+                    <div className="ad-badge">
+                      <span>AD</span>
+                    </div>
+                  )}
+                  {restaurant.offer && (
+                    <div className="offer-badge">
+                      <span>{restaurant.offer}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="card-content">
+                  <div className="restaurant-info">
+                    <h3 className="restaurant-name">{restaurant.name}</h3>
+                    <div className="restaurant-meta">
+                      <span className="rating">⭐ {restaurant.rating}</span>
+                      <span className="delivery-time">
+                        ⏱️ {restaurant.deliveryTime}
+                      </span>
+                    </div>
+                    <p className="cuisine">{restaurant.cuisine}</p>
+                    <p className="location">{restaurant.location}</p>
+                  </div>
+
+                  <div className="card-actions">
+                    <Link to={`/meal/${restaurant.id}`}>
+                      <Button type="primary" className="view-menu-btn">
+                        View Menu
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
